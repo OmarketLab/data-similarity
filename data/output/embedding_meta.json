@@ -1,0 +1,8 @@
+{
+  "model_version": "item2vec_v1_20260623",
+  "dim": 64,
+  "n_products": 4224,
+  "min_count": 5,
+  "epochs": 30,
+  "seed": 42
+}
