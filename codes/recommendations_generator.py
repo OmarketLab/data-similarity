@@ -84,7 +84,7 @@ for s, g in tmp.groupby(SEG_COL):
     seg_pool[s] = np.array(sorted({code_idx[c] for c in g["stock_code"]}))
 
 # segment_support: 세그먼트별 (이 상품을 산 고객 수 / 세그먼트 전체 고객 수)
-seg_cust_count = tmp.groupby(SEG_COL)["customer_id"].nunique().to_dict()
+seg_cust_count = seg.groupby(SEG_COL)["customer_id"].nunique().to_dict()
 seg_support = {}                                            # seg_support[segment][stock_code] = 비율(0~1)
 for (s, code), n_buyers in tmp.groupby([SEG_COL, "stock_code"])["customer_id"].nunique().items():
     seg_support.setdefault(s, {})[code] = n_buyers / seg_cust_count[s]
