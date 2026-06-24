@@ -41,8 +41,8 @@ $env:PYTHONHASHSEED=0; python embedding_training.py
 ```bash
 python recommendations_generator.py customer_result.csv
 ```
-- 각 고객의 취향 좌표(=산 상품들의 평균)를 구해, **같은 세그먼트가 사는 상품 풀** 안에서 가까운 미구매 상품 top-10을 뽑습니다.
-- 산출: `recommend_products.csv` (컬럼: `customer_id, stock_code, similarity_score, rank, model_version`)  
+- 각 고객의 취향 좌표(=산 상품들의 평균)를 구해, **같은 세그먼트가 사는 상품 풀** 안에서 가까운 미구매 상품 top-3을 뽑습니다.
+- 산출: `similarity_product_result.csv` (컬럼: `customer_id, stock_code, similarity_score, rank, model_version`)  
 
 ### 4. DB 적재   (MVP x)
 
@@ -55,6 +55,6 @@ bashpsql -d <DB이름> -f code/db_loader.sql
 bashpsql -d <DB이름>
 ```
 ```sql
-\copy recommend_products(customer_id, stock_code, similarity_score, rank, model_version) FROM 'data/output/recommend_products.csv' WITH (FORMAT csv, HEADER true);
+\copy recommend_products(customer_id, stock_code, similarity_score, rank, model_version) FROM 'data/output/similarity_product_result.csv' WITH (FORMAT csv, HEADER true);
 ```
 
